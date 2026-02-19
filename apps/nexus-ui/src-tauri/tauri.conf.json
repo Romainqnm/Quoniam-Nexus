@@ -1,0 +1,32 @@
+{
+  "$schema": "./schemas/tauri-config.schema.json",
+  "productName": "Quoniam Nexus",
+  "version": "0.1.0",
+  "identifier": "com.quoniam.nexus",
+  "build": {
+    "frontendDist": "../web"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Quoniam Nexus",
+        "width": 1200,
+        "height": 760,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "windows": {
+      "wix": {
+        "language": "fr-FR"
+      }
+    }
+  }
+}

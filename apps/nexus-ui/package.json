@@ -1,0 +1,18 @@
+{
+  "name": "nexus-ui",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "tauri:dev": "tauri dev --config src-tauri/tauri.conf.json",
+    "tauri:build": "tauri build --config src-tauri/tauri.conf.json",
+    "dev": "vite web"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2.1.0",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.10.1"
+  }
+}

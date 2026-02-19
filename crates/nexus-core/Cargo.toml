@@ -1,0 +1,37 @@
+[package]
+name = "nexus-core"
+version = "0.1.0"
+edition = "2021"
+description = "Moteur central Quoniam Nexus (CLI, daemon, commandes système)"
+
+[lib]
+name = "nexus_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "nexus-core"
+path = "src/main.rs"
+
+[features]
+default = []
+ui = ["dep:tauri"]
+
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+serde.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dependencies.tauri]
+version = "2"
+optional = true
+
+[target.'cfg(windows)'.dependencies]
+windows = { version = "0.60", features = [
+  "Win32_Foundation",
+  "Win32_Security",
+  "Win32_System_Services",
+  "Win32_System_Threading"
+] }
+winreg = "0.52"

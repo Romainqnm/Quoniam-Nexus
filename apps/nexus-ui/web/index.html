@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quoniam Nexus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient-bg" aria-hidden="true"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">Quoniam Nexus</div>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="home" data-i18n="navHome">
+          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 7v10a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1V10l8-7z"/></svg>
+          <span>Accueil</span>
+        </button>
+        <button class="nav-btn" data-view="expert" data-i18n="navExpert">
+          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.49 7.49 0 0 0 .05-.94 7.49 7.49 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.22 7.22 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7.22 7.22 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.03.31-.05.63-.05.94 0 .31.02.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
+          <span>Mode Expert</span>
+        </button>
+        <button class="nav-btn" data-view="settings" data-i18n="navSettingsLogs">
+          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v4H4V4zm0 6h16v4H4v-4zm0 6h10v4H4v-4z"/></svg>
+          <span>Paramètres & Logs</span>
+        </button>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <section class="view active" id="view-home">
+        <h1 data-i18n="homeTitle">Optimisation simple en 1 clic</h1>
+        <p class="lead" data-i18n="homeSubtitle">Analysez et appliquez les optimisations principales automatiquement.</p>
+
+        <button id="quick-optimize" class="magic-btn" data-i18n="quickOptimize">Analyse & Optimisation Rapide</button>
+
+        <h2 data-i18n="powerTitle">Profil d'énergie</h2>
+        <div class="power-grid">
+          <article class="power-card" data-power-mode="eco">
+            <button class="gear-btn" type="button" data-profile="eco" aria-label="Personnaliser Économie">⚙️</button>
+            <svg class="profile-icon profile-eco" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 7 6 10 6 13a6 6 0 0 0 12 0c0-3-2-6-6-11z"/></svg>
+            <span class="title" data-i18n="powerEco">Économie</span>
+            <span class="desc" data-i18n="powerEcoDesc">Réduit la consommation pour maximiser l'autonomie.</span>
+          </article>
+          <article class="power-card" data-power-mode="balanced">
+            <button class="gear-btn" type="button" data-profile="balanced" aria-label="Personnaliser Équilibré">⚙️</button>
+            <svg class="profile-icon profile-balanced" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l5 6h4v2h-5l-4-5-4 5H3V9h4l5-6zm-6 9h2v7h8v-7h2v9H6v-9z"/></svg>
+            <span class="title" data-i18n="powerBalanced">Équilibré</span>
+            <span class="desc" data-i18n="powerBalancedDesc">Compromis recommandé entre performance et efficacité.</span>
+          </article>
+          <article class="power-card" data-power-mode="performance">
+            <button class="gear-btn" type="button" data-profile="performance" aria-label="Personnaliser Performance">⚙️</button>
+            <svg class="profile-icon profile-performance" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 14l7-11 1 7h6l-8 11-1-7H5z"/></svg>
+            <span class="title" data-i18n="powerPerformance">Performance</span>
+            <span class="desc" data-i18n="powerPerformanceDesc">Priorise la vitesse et la réactivité du système.</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-expert">
+        <h1 data-i18n="expertTitle">Mode Expert</h1>
+        <p class="warning" data-i18n="expertWarning">Outils avancés: utilisez-les si vous comprenez leur impact.</p>
+
+        <div class="tools-grid">
+          <button id="deep-clean" class="tool-btn" data-i18n="deepClean">Nettoyage profond</button>
+          <button id="optimize-ram" class="tool-btn" data-i18n="optimizeRam">Optimiser la mémoire</button>
+          <button id="debloat" class="tool-btn" data-i18n="debloat">Désinstaller bloatwares</button>
+          <button id="update-all" class="tool-btn" data-i18n="updateAll">Mettre à jour tout</button>
+          <button id="flush-dns" class="tool-btn" data-i18n="flushDns">Vider le cache DNS</button>
+          <button id="reset-network" class="tool-btn" data-i18n="resetNetwork">Réinitialiser le réseau</button>
+          <button id="set-dns-cf" class="tool-btn" data-i18n="setDnsCloudflare">DNS Cloudflare (1.1.1.1)</button>
+          <button id="set-dns-google" class="tool-btn" data-i18n="setDnsGoogle">DNS Google (8.8.8.8)</button>
+        </div>
+
+        <div class="startup-panel">
+          <div class="startup-header">
+            <h2 data-i18n="startupApps">Applications au démarrage</h2>
+            <button id="refresh-startup" class="secondary-btn" data-i18n="refresh">Actualiser</button>
+          </div>
+          <ul id="startup-list" class="startup-list"></ul>
+        </div>
+      </section>
+
+      <section class="view" id="view-settings">
+        <h1 data-i18n="settingsTitle">Paramètres</h1>
+
+        <div class="settings-row">
+          <label for="theme-select" data-i18n="theme">Thème</label>
+          <select id="theme-select">
+            <option value="dark" data-i18n="themeDark">Sombre</option>
+            <option value="light" data-i18n="themeLight">Clair</option>
+          </select>
+        </div>
+
+        <div class="settings-row">
+          <label for="lang-select" data-i18n="language">Langue</label>
+          <select id="lang-select">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+          </select>
+        </div>
+
+        <h2 data-i18n="logsTitle">Logs</h2>
+        <pre id="log-output" class="log-output"></pre>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay" hidden>
+    <div class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+      <h2 id="profile-modal-title" data-i18n="profileModalTitle">Personnaliser le profil</h2>
+
+      <div class="control-row">
+        <label for="cpu-min" data-i18n="cpuMin">Performance CPU Min</label>
+        <input id="cpu-min" type="range" min="0" max="100" value="25" />
+      </div>
+
+      <div class="control-row">
+        <label for="cpu-max" data-i18n="cpuMax">Performance CPU Max</label>
+        <input id="cpu-max" type="range" min="0" max="100" value="85" />
+      </div>
+
+      <div class="control-row">
+        <label for="screen-timeout" data-i18n="screenOff">Extinction Écran (min)</label>
+        <input id="screen-timeout" type="range" min="1" max="30" value="10" />
+      </div>
+
+      <div class="modal-actions">
+        <button id="cancel-modal" type="button" class="liquid-action secondary" data-i18n="cancel">Annuler</button>
+        <button id="save-modal" type="button" class="liquid-action primary" data-i18n="save">Sauvegarder</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>
