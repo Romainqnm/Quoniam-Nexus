@@ -13,7 +13,7 @@ use std::time::{Duration, Instant};
 use anyhow::{bail, Result};
 #[cfg(windows)]
 use anyhow::Context;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize)]
 pub struct CleanerReport {
@@ -21,6 +21,26 @@ pub struct CleanerReport {
     pub removed_entries: u64,
     pub failed_entries: u64,
     pub failures: Vec<String>,
+}
+
+#[derive(Debug, Clone, Copy, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct DeepCleanSelection {
+    pub clean_windows_temp: bool,
+    pub clean_windows_update: bool,
+    pub clean_browser_cache: bool,
+    pub clean_prefetch: bool,
+}
+
+impl DeepCleanSelection {
+    fn all() -> Self {
+        Self {
+            clean_windows_temp: true,
+            clean_windows_update: true,
+            clean_browser_cache: true,
+            clean_prefetch: true,
+        }
+    }
 }
 
 impl CleanerReport {
@@ -37,18 +57,44 @@ impl CleanerReport {
 
 #[cfg(windows)]
 pub fn deep_clean() -> Result<CleanerReport> {
+    deep_clean_selected_impl(DeepCleanSelection::all())
+}
+
+#[cfg(windows)]
+pub fn deep_clean_selected(selection: DeepCleanSelection) -> Result<CleanerReport> {
+    deep_clean_selected_impl(selection)
+}
+
+#[cfg(windows)]
+fn deep_clean_selected_impl(selection: DeepCleanSelection) -> Result<CleanerReport> {
     let mut report = CleanerReport::new();
 
-    for target in base_temp_targets() {
+    if selection.clean_windows_temp {
+        for target in windows_temp_targets() {
+            report.scanned_paths.push(target.display().to_string());
+            if target.exists() {
+                purge_directory_contents(&target, &mut report)
+                    .with_context(|| format!("Impossible d'énumérer {}", target.display()))?;
+            }
+        }
+    }
+
+    if selection.clean_windows_update {
+        clean_windows_update_download_cache(&mut report)?;
+    }
+
+    if selection.clean_browser_cache {
+        clean_chromium_caches(&mut report)?;
+    }
+
+    if selection.clean_prefetch {
+        let target = prefetch_target();
         report.scanned_paths.push(target.display().to_string());
         if target.exists() {
             purge_directory_contents(&target, &mut report)
                 .with_context(|| format!("Impossible d'énumérer {}", target.display()))?;
         }
     }
-
-    clean_windows_update_download_cache(&mut report)?;
-    clean_chromium_caches(&mut report)?;
 
     Ok(report)
 }
@@ -60,8 +106,15 @@ pub fn deep_clean() -> Result<CleanerReport> {
     )
 }
 
+#[cfg(not(windows))]
+pub fn deep_clean_selected(_selection: DeepCleanSelection) -> Result<CleanerReport> {
+    bail!(
+        "Le deep clean est disponible uniquement sous Windows. Exécutez ce binaire Windows (x86_64-pc-windows-gnu)."
+    )
+}
+
 #[cfg(windows)]
-fn base_temp_targets() -> Vec<PathBuf> {
+fn windows_temp_targets() -> Vec<PathBuf> {
     let mut targets = Vec::new();
 
     if let Some(temp) = std::env::var_os("TEMP") {
@@ -74,9 +127,13 @@ fn base_temp_targets() -> Vec<PathBuf> {
     }
 
     targets.push(PathBuf::from(r"C:\Windows\Temp"));
-    targets.push(PathBuf::from(r"C:\Windows\Prefetch"));
 
     targets
+}
+
+#[cfg(windows)]
+fn prefetch_target() -> PathBuf {
+    PathBuf::from(r"C:\Windows\Prefetch")
 }
 
 #[cfg(windows)]

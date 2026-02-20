@@ -9,9 +9,11 @@ tauri-build = { version = "2", features = [] }
 
 [dependencies]
 anyhow.workspace = true
-serde.workspace = true
+serde = "1.0"
 serde_json.workspace = true
 tauri = { version = "2", features = [] }
+sysinfo = "0.30"
+wmi = "0.13"
 nexus-core = { path = "../../../crates/nexus-core" }
 
 [features]

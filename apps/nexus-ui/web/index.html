@@ -7,125 +7,452 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="ambient-bg" aria-hidden="true"></div>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">Quoniam Nexus</div>
-      <nav class="nav">
-        <button class="nav-btn active" data-view="home" data-i18n="navHome">
-          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 7v10a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1V10l8-7z"/></svg>
-          <span>Accueil</span>
-        </button>
-        <button class="nav-btn" data-view="expert" data-i18n="navExpert">
-          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94a7.49 7.49 0 0 0 .05-.94 7.49 7.49 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.22 7.22 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42l-.36 2.54a7.22 7.22 0 0 0-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.03.31-.05.63-.05.94 0 .31.02.63.05.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.39 1.05.71 1.63.94l.36 2.54a.5.5 0 0 0 .5.42h3.84a.5.5 0 0 0 .5-.42l.36-2.54c.58-.23 1.13-.55 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg>
-          <span>Mode Expert</span>
-        </button>
-        <button class="nav-btn" data-view="settings" data-i18n="navSettingsLogs">
-          <svg class="liquid-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v4H4V4zm0 6h16v4H4v-4zm0 6h10v4H4v-4z"/></svg>
-          <span>Paramètres & Logs</span>
-        </button>
-      </nav>
-    </aside>
+  <div class="app-frame">
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">Quoniam Nexus</div>
+        <nav class="nav">
+          <button class="nav-btn active" data-view="home" data-i18n="navHome">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5L12 3l9 7.5M5.5 9.5V21h13V9.5"/></svg>
+            <span>Accueil</span>
+          </button>
+          <button class="nav-btn" data-view="expert" data-i18n="navExpert">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm8 3.5.9 2.5-2 1.2a7.8 7.8 0 0 1-.8 1.3l.5 2.3-2.4 1.1-1.5-1.8a7.6 7.6 0 0 1-1.6.2L11.5 21h-2.9L8 18.8a7.6 7.6 0 0 1-1.6-.4l-1.6 1.4-2.3-1.3.6-2.2a7.8 7.8 0 0 1-.9-1.4L0 13.8 1 11.2l2.2-.3c.2-.5.4-1 .7-1.4L3.2 7.3 5.4 6l1.8 1.3c.5-.2 1-.3 1.6-.4L9.5 4h3l.7 2.9c.5.1 1 .2 1.5.4L16.5 6l2.3 1.3-.7 2.2c.3.4.6.9.8 1.4l2.1.1Z"/></svg>
+            <span>Mode Expert</span>
+          </button>
+          <button class="nav-btn" data-view="settings" data-i18n="navSettingsLogs">
+            <svg class="nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <span>Paramètres & Logs</span>
+          </button>
+        </nav>
+      </aside>
 
-    <main class="main-content">
-      <section class="view active" id="view-home">
-        <h1 data-i18n="homeTitle">Optimisation simple en 1 clic</h1>
-        <p class="lead" data-i18n="homeSubtitle">Analysez et appliquez les optimisations principales automatiquement.</p>
+      <main class="main-content">
+        <header class="top-header">
+          <span class="text-secondary">Système : <strong id="host-name">Chargement...</strong> | Uptime : <strong id="uptime-value">--:--:--</strong></span>
+        </header>
 
-        <button id="quick-optimize" class="magic-btn" data-i18n="quickOptimize">Analyse & Optimisation Rapide</button>
+        <section class="view active" id="view-home">
+          <article class="matte-card">
+            <h1 data-i18n="homeTitle">Optimisation simple en 1 clic</h1>
+            <p class="lead" data-i18n="homeSubtitle">Analysez et appliquez les optimisations principales automatiquement.</p>
+            <div class="system-specs-bar">
+              <span>OS: <strong class="spec-accent" id="os-version">--</strong></span>
+              <span>|</span>
+              <span>Carte Mère: <strong class="spec-accent" id="motherboard-model">--</strong></span>
+              <span>|</span>
+              <span>Temps de fonctionnement: <strong class="spec-accent" id="uptime-inline">--:--:--</strong></span>
+            </div>
 
-        <h2 data-i18n="powerTitle">Profil d'énergie</h2>
-        <div class="power-grid">
-          <article class="power-card" data-power-mode="eco">
-            <button class="gear-btn" type="button" data-profile="eco" aria-label="Personnaliser Économie">⚙️</button>
-            <svg class="profile-icon profile-eco" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 7 6 10 6 13a6 6 0 0 0 12 0c0-3-2-6-6-11z"/></svg>
-            <span class="title" data-i18n="powerEco">Économie</span>
-            <span class="desc" data-i18n="powerEcoDesc">Réduit la consommation pour maximiser l'autonomie.</span>
+            <section class="status-panel" aria-label="System Status">
+              <h2 data-i18n="systemStatusTitle">Statut du système</h2>
+              <div class="command-grid">
+                <article class="status-card dense-card">
+                  <div class="card-title-row">
+                    <span class="status-label" data-i18n="statusCpuLabel">Utilisation CPU</span>
+                    <span id="cpu-temp" class="status-value-inline">--°C</span>
+                  </div>
+                  <div class="status-main-metric">
+                    <span id="cpu-value" class="status-value">--%</span>
+                    <span id="cpu-status" class="status-state neutral">Stable</span>
+                    <span id="cpu-score" class="status-state neutral">Score --</span>
+                  </div>
+                  <div id="cpu-cores-grid" class="cores-grid"></div>
+                </article>
+
+                <article class="status-card dense-card">
+                  <span class="status-label" data-i18n="statusRamLabel">Utilisation RAM</span>
+                  <div class="ram-ring-wrap">
+                    <div class="ram-ring" id="ram-ring">
+                      <span id="ram-value" class="status-value">--%</span>
+                    </div>
+                  </div>
+                  <div class="ram-breakdown">
+                    <span id="ram-used">Used: --</span>
+                    <span id="ram-available">Available: --</span>
+                    <span id="ram-speed">Vitesse: -- MHz</span>
+                    <span id="ram-status" class="status-state neutral">Stable</span>
+                  </div>
+                </article>
+
+                <article class="status-card dense-card">
+                  <span class="status-label">GPU</span>
+                  <div class="status-main-metric">
+                    <span id="gpu-name" class="status-value-inline">Unknown GPU</span>
+                    <span id="gpu-load" class="status-value">--%</span>
+                  </div>
+                  <div class="gpu-stats-grid">
+                    <span id="gpu-temp">Temp: --°C</span>
+                    <span id="gpu-clocks">Core: -- MHz • Mémoire: -- MHz</span>
+                    <span id="gpu-fan">Fan: -- RPM</span>
+                    <span id="gpu-vram">VRAM: -- / --</span>
+                  </div>
+                </article>
+
+                <article class="status-card dense-card">
+                  <span class="status-label">Disques</span>
+                  <ul id="disks-list" class="storage-list"></ul>
+                </article>
+              </div>
+            </section>
+
+            <button id="quick-optimize" class="magic-btn premium-btn">
+              <span class="btn-bolt" aria-hidden="true">⚡</span>
+              <span data-i18n="quickOptimize">Analyse & Optimisation Rapide</span>
+            </button>
           </article>
-          <article class="power-card" data-power-mode="balanced">
-            <button class="gear-btn" type="button" data-profile="balanced" aria-label="Personnaliser Équilibré">⚙️</button>
-            <svg class="profile-icon profile-balanced" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l5 6h4v2h-5l-4-5-4 5H3V9h4l5-6zm-6 9h2v7h8v-7h2v9H6v-9z"/></svg>
-            <span class="title" data-i18n="powerBalanced">Équilibré</span>
-            <span class="desc" data-i18n="powerBalancedDesc">Compromis recommandé entre performance et efficacité.</span>
+
+          <article class="matte-card">
+            <h2 data-i18n="powerTitle">Profil d'énergie</h2>
+            <div class="power-grid">
+              <article class="power-card" data-power-mode="eco">
+                <button class="gear-btn" type="button" data-profile="eco" aria-label="Personnaliser Économie">⚙️</button>
+                <svg class="profile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 7 6 10 6 13a6 6 0 0 0 12 0c0-3-2-6-6-11z"/></svg>
+                <span class="title" data-i18n="powerEco">Économie</span>
+                <span class="desc" data-i18n="powerEcoDesc">Réduit la consommation pour maximiser l'autonomie.</span>
+              </article>
+              <article class="power-card" data-power-mode="balanced">
+                <button class="gear-btn" type="button" data-profile="balanced" aria-label="Personnaliser Équilibré">⚙️</button>
+                <svg class="profile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l5 6h4v2h-5l-4-5-4 5H3V9h4l5-6zm-6 9h2v7h8v-7h2v9H6v-9z"/></svg>
+                <span class="title" data-i18n="powerBalanced">Équilibré</span>
+                <span class="desc" data-i18n="powerBalancedDesc">Compromis recommandé entre performance et efficacité.</span>
+              </article>
+              <article class="power-card" data-power-mode="performance">
+                <button class="gear-btn" type="button" data-profile="performance" aria-label="Personnaliser Performance">⚙️</button>
+                <svg class="profile-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 14l7-11 1 7h6l-8 11-1-7H5z"/></svg>
+                <span class="title" data-i18n="powerPerformance">Performance</span>
+                <span class="desc" data-i18n="powerPerformanceDesc">Priorise la vitesse et la réactivité du système.</span>
+              </article>
+            </div>
           </article>
-          <article class="power-card" data-power-mode="performance">
-            <button class="gear-btn" type="button" data-profile="performance" aria-label="Personnaliser Performance">⚙️</button>
-            <svg class="profile-icon profile-performance" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 14l7-11 1 7h6l-8 11-1-7H5z"/></svg>
-            <span class="title" data-i18n="powerPerformance">Performance</span>
-            <span class="desc" data-i18n="powerPerformanceDesc">Priorise la vitesse et la réactivité du système.</span>
-          </article>
-        </div>
-      </section>
+        </section>
 
-      <section class="view" id="view-expert">
-        <h1 data-i18n="expertTitle">Mode Expert</h1>
-        <p class="warning" data-i18n="expertWarning">Outils avancés: utilisez-les si vous comprenez leur impact.</p>
+        <section class="view" id="view-expert">
+          <div class="expert-lounge-grid">
+            <article class="expert-card expert-card-wide">
+              <header class="card-head">
+                <svg class="expert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M6 11h12M8 15h8M9 3h6l1 2h3a1 1 0 0 1 1 1v12a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a1 1 0 0 1 1-1h3l1-2z"/></svg>
+                <div>
+                  <h2 data-i18n="expertGroupCleanup">🧹 Nettoyage & Maintenance</h2>
+                  <p class="card-sub">Supprime les résidus système pour libérer de l’espace et améliorer la réactivité globale.</p>
+                </div>
+              </header>
 
-        <div class="tools-grid">
-          <button id="deep-clean" class="tool-btn" data-i18n="deepClean">Nettoyage profond</button>
-          <button id="optimize-ram" class="tool-btn" data-i18n="optimizeRam">Optimiser la mémoire</button>
-          <button id="debloat" class="tool-btn" data-i18n="debloat">Désinstaller bloatwares</button>
-          <button id="update-all" class="tool-btn" data-i18n="updateAll">Mettre à jour tout</button>
-          <button id="flush-dns" class="tool-btn" data-i18n="flushDns">Vider le cache DNS</button>
-          <button id="reset-network" class="tool-btn" data-i18n="resetNetwork">Réinitialiser le réseau</button>
-          <button id="set-dns-cf" class="tool-btn" data-i18n="setDnsCloudflare">DNS Cloudflare (1.1.1.1)</button>
-          <button id="set-dns-google" class="tool-btn" data-i18n="setDnsGoogle">DNS Google (8.8.8.8)</button>
-        </div>
+              <div class="check-grid lounge-check-grid">
+                <label class="check-option"><input type="checkbox" id="clean-windows-temp" checked><span data-i18n="cleanWindowsTemp">Fichiers Temporaires Windows</span></label>
+                <label class="check-option"><input type="checkbox" id="clean-windows-update" checked><span data-i18n="cleanWindowsUpdate">Cache Windows Update</span></label>
+                <label class="check-option"><input type="checkbox" id="clean-browser-cache" checked><span data-i18n="cleanBrowserCache">Cache Navigateurs</span></label>
+                <label class="check-option"><input type="checkbox" id="clean-prefetch" checked><span data-i18n="cleanPrefetch">Dossier Prefetch</span></label>
+              </div>
 
-        <div class="startup-panel">
-          <div class="startup-header">
-            <h2 data-i18n="startupApps">Applications au démarrage</h2>
-            <button id="refresh-startup" class="secondary-btn" data-i18n="refresh">Actualiser</button>
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="runSelection">Exécuter la sélection</h4>
+                  <span class="badge badge-safe">Safe</span>
+                </div>
+                <p>Lance uniquement les tâches cochées pour un nettoyage ciblé et contrôlé.</p>
+                <button id="run-clean-selection" class="tool-btn" data-i18n="runSelection">Exécuter la sélection</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="deepClean">Nettoyage profond</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Analyse complète et suppression avancée. Peut prendre plusieurs minutes selon l’état du système.</p>
+                <div class="est-space">Espace libérable estimé : <span>~3.1 GB</span></div>
+                <button id="deep-clean" class="tool-btn" data-i18n="deepClean">Nettoyage profond</button>
+              </div>
+            </article>
+
+            <article class="expert-card">
+              <header class="card-head">
+                <svg class="expert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 14l7-11 1 7h6l-8 11-1-7H5z"/></svg>
+                <div>
+                  <h2 data-i18n="expertGroupOptimization">⚡ Optimisation Système</h2>
+                  <p class="card-sub">Actions de performance et ajustements de charge système.</p>
+                </div>
+              </header>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="optimizeRam">Optimiser la mémoire</h4>
+                  <span class="badge badge-safe">Safe</span>
+                </div>
+                <p>Vide la mémoire en cache. Peut provoquer un léger ralentissement juste après exécution.</p>
+                <button id="optimize-ram" class="tool-btn" data-i18n="optimizeRam">Optimiser la mémoire</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="debloat">Désinstaller bloatwares</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Désactive des composants superflus pour réduire les services en arrière-plan.</p>
+                <button id="debloat" class="tool-btn" data-i18n="debloat">Désinstaller bloatwares</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4>Optimiser NTFS</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Applique des paramètres de fichiers recommandés pour améliorer la réactivité disque.</p>
+                <button id="optimize-ntfs" class="tool-btn">Optimiser NTFS</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4>Désactiver télémétrie</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Désactive les services de télémétrie Windows les plus courants.</p>
+                <button id="disable-telemetry-services" class="tool-btn">Désactiver télémétrie</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4>CPU Boost (agressif)</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Force un mode de boost processeur plus performant pour le profil actif.</p>
+                <button id="cpu-boost-aggressive" class="tool-btn">Appliquer CPU Boost</button>
+              </div>
+            </article>
+
+            <article class="expert-card">
+              <header class="card-head">
+                <svg class="expert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h10M4 17h6M18 10l2 2-2 2M15 10l-2 2 2 2"/></svg>
+                <div>
+                  <h2 data-i18n="expertGroupNetwork">🌐 Réseau & Connectivité</h2>
+                  <p class="card-sub">Réinitialisation réseau et configuration DNS rapide/sûre.</p>
+                </div>
+              </header>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="flushDns">Vider le cache DNS</h4>
+                  <span class="badge badge-safe">Safe</span>
+                </div>
+                <p>Force le système à récupérer des enregistrements DNS récents.</p>
+                <button id="flush-dns" class="tool-btn" data-i18n="flushDns">Vider le cache DNS</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="resetNetwork">Réinitialiser le réseau</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Répare les piles IP/Winsock en cas de connexion instable.</p>
+                <button id="reset-network" class="tool-btn" data-i18n="resetNetwork">Réinitialiser le réseau</button>
+              </div>
+
+              <div class="action-inline">
+                <button id="set-dns-cf" class="tool-btn" data-i18n="setDnsCloudflare">DNS Cloudflare (1.1.1.1)</button>
+                <button id="set-dns-google" class="tool-btn" data-i18n="setDnsGoogle">DNS Google (8.8.8.8)</button>
+              </div>
+            </article>
+
+            <article class="expert-card">
+              <header class="card-head">
+                <svg class="expert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v8H4zM8 16v2M16 16v2M9 12h.01M12 12h.01M15 12h.01"/></svg>
+                <div>
+                  <h2 data-i18n="expertGroupGpu">🎮 Carte Graphique & Affichage</h2>
+                  <p class="card-sub" data-i18n="expertGroupGpuDesc">Optimisations GPU avancées pour latence et fluidité.</p>
+                </div>
+              </header>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="gpuHagsTitle">Accélération Matérielle (HAGS)</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p data-i18n="gpuHagsReboot">Nécessite un redémarrage</p>
+                <select id="gpu-hags-mode">
+                  <option value="off" data-i18n="gpuHagsOff">Désactivé</option>
+                  <option value="on" data-i18n="gpuHagsOn">Activé</option>
+                </select>
+                <button id="set-gpu-hags" class="tool-btn" data-i18n="gpuHagsApply">Appliquer HAGS</button>
+              </div>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="gpuShaderTitle">Cache DirectX</h4>
+                  <span class="badge badge-safe">Safe</span>
+                </div>
+                <button id="clear-shader-cache" class="tool-btn" data-i18n="gpuShaderClear">Vider le cache des Shaders</button>
+              </div>
+            </article>
+
+            <article class="expert-card">
+              <header class="card-head">
+                <svg class="expert-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l2 4v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7l2-4zM8 8h8M8 12h8M8 16h5"/></svg>
+                <div>
+                  <h2 data-i18n="expertGroupUpdates">📦 Mises à jour & Démarrage</h2>
+                  <p class="card-sub">Gestion des paquets et contrôle des applications lancées au boot.</p>
+                </div>
+              </header>
+
+              <div class="action-block">
+                <div class="action-head">
+                  <h4 data-i18n="updateAll">Mettre à jour tout</h4>
+                  <span class="badge badge-warn">Reboot</span>
+                </div>
+                <p>Exécute la mise à jour des paquets installés via la chaîne de mise à jour système.</p>
+                <button id="update-all" class="tool-btn" data-i18n="updateAll">Mettre à jour tout</button>
+              </div>
+
+              <div class="startup-header">
+                <h3 data-i18n="startupApps">Applications au démarrage</h3>
+                <button id="refresh-startup" class="secondary-btn" data-i18n="refresh">Actualiser</button>
+              </div>
+              <ul id="startup-list" class="startup-list"></ul>
+            </article>
           </div>
-          <ul id="startup-list" class="startup-list"></ul>
-        </div>
-      </section>
+        </section>
 
-      <section class="view" id="view-settings">
-        <h1 data-i18n="settingsTitle">Paramètres</h1>
+        <section class="view" id="view-settings">
+          <article class="matte-card">
+            <h1 data-i18n="settingsTitle">Paramètres</h1>
 
-        <div class="settings-row">
-          <label for="theme-select" data-i18n="theme">Thème</label>
-          <select id="theme-select">
-            <option value="dark" data-i18n="themeDark">Sombre</option>
-            <option value="light" data-i18n="themeLight">Clair</option>
-          </select>
-        </div>
+            <div class="settings-block">
+              <label class="settings-label" data-i18n="theme">Thème</label>
+              <div class="segmented" role="group" aria-label="Theme selector">
+                <button id="theme-btn-dark" type="button" class="segmented-btn active" data-value="dark" data-i18n="themeDark">Sombre</button>
+                <button id="theme-btn-light" type="button" class="segmented-btn" data-value="light" data-i18n="themeLight">Clair</button>
+              </div>
+              <select id="theme-select" class="native-hidden" aria-hidden="true" tabindex="-1">
+                <option value="dark" data-i18n="themeDark">Sombre</option>
+                <option value="light" data-i18n="themeLight">Clair</option>
+              </select>
+            </div>
 
-        <div class="settings-row">
-          <label for="lang-select" data-i18n="language">Langue</label>
-          <select id="lang-select">
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="ar">العربية</option>
-          </select>
-        </div>
+            <div class="settings-block">
+              <label class="settings-label" data-i18n="language">Langue</label>
+              <div class="segmented segmented-lang" role="group" aria-label="Language selector">
+                <button id="lang-btn-fr" type="button" class="segmented-btn active" data-value="fr">FR</button>
+                <button id="lang-btn-en" type="button" class="segmented-btn" data-value="en">EN</button>
+                <button id="lang-btn-es" type="button" class="segmented-btn" data-value="es">ES</button>
+                <button id="lang-btn-ar" type="button" class="segmented-btn" data-value="ar">AR</button>
+              </div>
+              <select id="lang-select" class="native-hidden" aria-hidden="true" tabindex="-1">
+                <option value="fr">Français</option>
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="ar">العربية</option>
+              </select>
+            </div>
+          </article>
 
-        <h2 data-i18n="logsTitle">Logs</h2>
-        <pre id="log-output" class="log-output"></pre>
-      </section>
-    </main>
+          <article class="matte-card">
+            <h2 data-i18n="logsTitle">Logs</h2>
+            <div class="terminal-shell">
+              <div class="terminal-toolbar">
+                <button id="log-copy" class="secondary-btn" type="button">📋 Copier</button>
+                <button id="log-clear" class="secondary-btn" type="button">🗑️ Effacer</button>
+                <button id="log-export" class="secondary-btn" type="button">💾 Exporter</button>
+              </div>
+              <div id="log-output" class="log-output" role="log" aria-live="polite"></div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
   </div>
 
   <div id="modal-overlay" class="modal-overlay" hidden>
     <div class="profile-modal" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
       <h2 id="profile-modal-title" data-i18n="profileModalTitle">Personnaliser le profil</h2>
 
-      <div class="control-row">
-        <label for="cpu-min" data-i18n="cpuMin">Performance CPU Min</label>
-        <input id="cpu-min" type="range" min="0" max="100" value="25" />
+      <div class="modal-tabs" role="tablist" aria-label="Power profile sections">
+        <button id="power-tab-basic" class="modal-tab active" type="button" role="tab" aria-selected="true" data-tab="basic" data-i18n="powerTabBasic">Basique</button>
+        <button id="power-tab-expert" class="modal-tab" type="button" role="tab" aria-selected="false" data-tab="expert" data-i18n="powerTabExpert">Expert</button>
       </div>
 
-      <div class="control-row">
-        <label for="cpu-max" data-i18n="cpuMax">Performance CPU Max</label>
-        <input id="cpu-max" type="range" min="0" max="100" value="85" />
-      </div>
+      <section class="modal-panel active" data-panel="basic" aria-label="Basic power settings">
+        <div class="control-row">
+          <div class="slider-head">
+            <label for="cpu-min" data-i18n="cpuMin">Performance CPU Min (%)</label>
+            <span id="cpu-min-val" class="slider-val">25%</span>
+          </div>
+          <input id="cpu-min" type="range" min="0" max="100" value="25" />
+        </div>
 
-      <div class="control-row">
-        <label for="screen-timeout" data-i18n="screenOff">Extinction Écran (min)</label>
-        <input id="screen-timeout" type="range" min="1" max="30" value="10" />
-      </div>
+        <div class="control-row">
+          <div class="slider-head">
+            <label for="cpu-max" data-i18n="cpuMax">Performance CPU Max (%)</label>
+            <span id="cpu-max-val" class="slider-val">85%</span>
+          </div>
+          <input id="cpu-max" type="range" min="0" max="100" value="85" />
+        </div>
+
+        <div class="control-row">
+          <div class="slider-head">
+            <label for="screen-timeout" data-i18n="screenOff">Extinction Écran (min)</label>
+            <span id="screen-timeout-val" class="slider-val">15 min</span>
+          </div>
+          <input id="screen-timeout" type="range" min="0" max="120" value="15" />
+        </div>
+
+        <div class="control-row">
+          <label for="cooling-policy" data-i18n="coolingPolicy">Refroidissement</label>
+          <select id="cooling-policy">
+            <option value="active" data-i18n="coolingActive">Actif (Ventilateurs en priorité)</option>
+            <option value="passive" data-i18n="coolingPassive">Passif (Ralentissement CPU en priorité)</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="disk-timeout" data-i18n="diskTimeout">Arrêter le disque dur après (minutes)</label>
+          <input id="disk-timeout" type="range" min="0" max="60" value="10" />
+        </div>
+
+        <div class="control-row">
+          <label for="wifi-mode" data-i18n="wifiMode">Carte Wi-Fi</label>
+          <select id="wifi-mode">
+            <option value="max_performance" data-i18n="wifiMax">Performances Maximales</option>
+            <option value="low_power" data-i18n="wifiLow">Économie d'énergie basse</option>
+            <option value="max_saving" data-i18n="wifiMaxSave">Économie maximale</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="pci-express" data-i18n="pciExpress">PCI Express (Gestion de l'alimentation de la liaison)</label>
+          <select id="pci-express">
+            <option value="off" data-i18n="pciOff">Désactivé</option>
+            <option value="moderate" data-i18n="pciModerate">Économie modérée</option>
+            <option value="max_saving" data-i18n="pciMax">Économie maximale</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="modal-panel" data-panel="expert" aria-label="Expert power settings">
+        <div class="control-row">
+          <div class="slider-head">
+            <label for="core-parking" data-i18n="coreParking">Stationnement des cœurs (Core Parking Min)</label>
+            <span id="core-parking-val" class="slider-val">50%</span>
+          </div>
+          <input id="core-parking" type="range" min="0" max="100" value="50" />
+        </div>
+
+        <div class="control-row">
+          <label for="boost-mode" data-i18n="boostMode">Mode d'accélération (Boost Mode)</label>
+          <select id="boost-mode">
+            <option value="0" data-i18n="boostDisabled">0: Désactivé</option>
+            <option value="1" data-i18n="boostEnabled">1: Activé</option>
+            <option value="2" data-i18n="boostAggressive">2: Agressif</option>
+            <option value="3" data-i18n="boostEfficientAggressive">3: Efficacité agressive</option>
+          </select>
+        </div>
+
+        <div class="control-row">
+          <label for="usb-suspend" data-i18n="usbSuspend">Suspension sélective USB</label>
+          <select id="usb-suspend">
+            <option value="0" data-i18n="usbSuspendDisabled">0: Désactivé (Performance absolue)</option>
+            <option value="1" data-i18n="usbSuspendEnabled">1: Activé (Économie)</option>
+          </select>
+        </div>
+      </section>
 
       <div class="modal-actions">
         <button id="cancel-modal" type="button" class="liquid-action secondary" data-i18n="cancel">Annuler</button>

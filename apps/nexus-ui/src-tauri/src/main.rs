@@ -9,6 +9,11 @@ fn deep_clean() -> Result<nexus_core::CleanerReport, String> {
 }
 
 #[tauri::command]
+fn deep_clean_selected(selection: nexus_core::DeepCleanSelection) -> Result<nexus_core::CleanerReport, String> {
+    nexus_core::deep_clean_selected(selection).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
 fn optimize_ram() -> Result<nexus_core::MemoryOptimizationReport, String> {
     nexus_core::optimize_ram().map_err(|e| e.to_string())
 }
@@ -44,6 +49,11 @@ fn set_power_mode(mode: &str) -> Result<String, String> {
 }
 
 #[tauri::command]
+fn apply_custom_power_profile(settings: nexus_core::windows::power::PowerSettings) -> Result<String, String> {
+    nexus_core::windows::power::apply_custom_power_profile(settings)
+}
+
+#[tauri::command]
 fn get_startup_apps() -> Result<Vec<nexus_core::StartupApp>, String> {
     nexus_core::windows::startup::get_startup_apps()
 }
@@ -53,11 +63,47 @@ fn disable_startup_app(name: &str) -> Result<String, String> {
     nexus_core::windows::startup::disable_startup_app(name)
 }
 
+#[tauri::command]
+fn set_advanced_cpu_tweak(guid: &str, value: u32) -> Result<String, String> {
+    nexus_core::set_advanced_cpu_tweak(guid, value).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn optimize_ntfs_settings() -> Result<String, String> {
+    nexus_core::optimize_ntfs_settings().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn disable_telemetry_services() -> Result<String, String> {
+    nexus_core::disable_telemetry_services().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn get_system_stats() -> Result<nexus_core::windows::monitor::SystemStats, String> {
+    nexus_core::get_system_stats().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn get_extended_stats() -> Result<nexus_core::windows::monitor::ExtendedStats, String> {
+    nexus_core::get_extended_stats().map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn set_gpu_hags(enable: bool) -> Result<String, String> {
+    nexus_core::set_gpu_hags(enable).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn clear_shader_cache() -> Result<String, String> {
+    nexus_core::clear_shader_cache().map_err(|e| e.to_string())
+}
+
 fn main() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             clean_temp,
             deep_clean,
+            deep_clean_selected,
             optimize_ram,
             debloat,
             update_all,
@@ -65,8 +111,16 @@ fn main() {
             reset_network,
             set_fast_dns,
             set_power_mode,
+            apply_custom_power_profile,
             get_startup_apps,
-            disable_startup_app
+            disable_startup_app,
+            set_advanced_cpu_tweak,
+            optimize_ntfs_settings,
+            disable_telemetry_services,
+            get_system_stats,
+            get_extended_stats,
+            set_gpu_hags,
+            clear_shader_cache
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
